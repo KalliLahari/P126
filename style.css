@@ -28,4 +28,5 @@ canvas{
     border: 5px solid navy;
     box-shadow: 5px 5px 5px purple;
     border-radius: 20px;
+    margin-top: 100px;
 }
