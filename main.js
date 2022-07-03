@@ -4,6 +4,9 @@ leftWrist_x=0;
 leftWrist_y=0;
 rightWrist_x=0;
 rightWrist_y=0;
+leftWrist_score=0;
+songstatus_1="";
+songstatus_2="";
 
 function setup(){
     canvas=createCanvas(600,500);
@@ -25,6 +28,19 @@ function preload(){
 
 function draw(){
     image(video,0,0,600,500);
+    stroke("darkblue");
+    fill("darkblue");
+    songstatus_1=song1.isPlaying();
+    songstatus_2=song2.isPlaying();
+
+    if(leftWrist_score>0.2){
+        circle(leftWrist_x,leftWrist_y,20);
+        song1.stop();
+        if(songstatus_2==false){
+            song2.play();
+            document.getElementById("song_name").innerHTML="Song Name : Peter Pan Song";
+        }
+    }
 }
 
 function gotPoses(results){
@@ -37,6 +53,9 @@ function gotPoses(results){
         rightWrist_x=results[0].pose.rightWrist.x;
         rightWrist_y=results[0].pose.rightWrist.y;
         console.log("rightWrist x : "+rightWrist_x+" ,rightWrist y : "+rightWrist_y);
+
+        leftWrist_score=results[0].pose.keypoints[9].score;
+        console.log(leftWrist_score);
     }
 }
 
